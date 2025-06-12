@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div id="main">
+        <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistify</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        
+html {
+    scroll-behavior: smooth;
+}  
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f7f7f7, #bedaf3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
+header {
+    background: linear-gradient(to right, #0a0120, #1E3A8A);
+    color: #ffffff;
+    text-align: center;
+    padding: 5px 10px; /* Reduced padding */
+    font-size: 20px; /* Reduced font size */
+    font-weight: 600;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.navbar {
+    background-image: url(https://i.postimg.cc/RhMJck7k/mistify.png);
+    background-size: cover;         /* Ensures the image covers the full navbar */
+    background-position: center;    /* Centers the image */
+    background-repeat: no-repeat;   /* Prevents repeating */
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+}
+.navbar > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Make sure the cart button aligns to the left */
+.navbar__container {
+    display: flex;
+    justify-content: flex-start; /* Align everything to the left */
+    height: 80px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.navbar__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    width: auto;  /* Remove width 100% to stop it from expanding */
+}
+
+#cart-icon {
+    margin-left: 0; /* Ensure no extra margin */
+    
+}
+
+#cart-icon {
+    position: relative;
+}
+
+#cart-count {
+    position: absolute;
+    top: -5px;   /* Adjust this to move the count higher */
+    right: -10px;  /* Adjust this to move the count closer to the icon */
+    font-size: 0.6rem;  /* Make it smaller than the icon */
+    color: #fff;
+  /* You can choose a color for the badge */
+    border-radius: 50%;
+    padding: 5px 8px;
+    background-color: #0a205f;
+}
+
+/* If the cart button needs to appear inside the navbar alongside the menu */
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+    margin-left: auto;  /* Push other items to the right */
+}
+
+
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar-menu * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+.navbar__items {
+    height: 80px;
+}
+
+.navbar__links {
+    color: lch(39.33% 79.29 38.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+}
+
+.__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    width: 100%;  
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background: #f77062;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: linear-gradient(to right, #4837ff, #660c03);
+    transition: all 0.3s ease;
+}
+
+.navbar__links:hover {
+    color: #f777;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 960px) {
+    .navbar__container {
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        z-index: 1;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px; /* Adjust padding */
+    } 
+
+    .navbar__menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 85%;
+        position: absolute;
+        top: 80px;  /* Adjusted to ensure the menu doesn't go off-screen */
+        opacity: 0; 
+        transition: all 0.5s ease;
+        background: #d3cece;
+        z-index: -1;
+    } 
+
+    .navbar__menu.active {
+        opacity: 1;
+        top: 80px;
+        z-index: 99;
+        height: auto;
+        font-size: 1.6rem; 
+    }
+
+    .navbar__toggle .bar {
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        transition: all 0.3s ease-in-out;
+        background: #000000;
+    }
+
+    .navbar__item {
+        width: 100%; 
+    }
+
+    .navbar__links {
+        text-align: center;
+        padding: 1rem;
+        width: 100%;
+        display: block;   /* Adjusted for mobile */
+    }
+
+    #mobile-menu {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        transform: translate(5%, 20%);
+    }
+}
+
+#cart-icon i {
+    color: #cf0505; 
+    font-size: 35px;
+    text-align: left;                  
+}
+
+/* Align cart button to the left */
+.navbar__btn {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* Adjust position of cart icon in the navbar */
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+     
+
+.button {
+        display: flex;
+        justify-content: center;align-items: center;
+        width: 80%;
+        height: 80px;
+        margin: 0;
+    }
+
+.navbar__toggle .bar {
+        display: block;
+        cursor: pointer;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    #mobile-menu.is-active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg)
+    }      
+
+    
+.logo-container {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+.logo-container img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+.container h2 {
+    justify-content: left;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.product-card {
+  max-width: 100%;
+}
+
+
+/* Add this media query to ensure 2 items per row on smaller screens */
+@media screen and (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+       
+    }
+}
+
+
+.product-grid .price {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #000000;
+    font-weight: 500;
+}
+
+.product {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 100%;
+}
+
+
+.product:hover {
+    transform: scale(1.07);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.35);
+}
+.product img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    aspect-ratio: 12 / 12;
+}
+
+.product h3 {
+    font-size: 1rem;
+    margin: 10px 0 5px;
+}
+
+.product p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.buy-button {
+    display: inline-block;
+    background: #2d2da8;
+    color: #ffffff;
+    padding: 14px 22px;
+    margin-top: 15px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+.buy-button:hover {
+    background: #660c03;
+}
+
+#priceFilter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#priceFilter button {
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#priceFilter button:hover {
+    background-color: #0056b3; /* Darker blue */
+    transform: scale(1.05);
+}
+
+#productList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.product {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#cart-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    width: 90%;
+    max-width: 500px;
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#cart-modal::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+#shopping cart i {
+    margin-right: 4px;
+    font-size: 10px;
+}
+
+#cart-heading {
+    color: #960505;
+    font-weight: bolder;
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+}
+
+#cart-info {
+    color: #111;
+    font-weight: 500;
+    text-align: justify;
+}
+
+#cart-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#cart-items > div {
+    margin: 10px 0;
+    font-size: 1rem;
+    font-weight: bolder;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+#cart-items button {
+    background: #06047c;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fas-regular.fa-circle-check {
+    margin-left: 8px;
+    color: #28a745;
+}
+
+#cart-items button:hover {
+    background: #c92a3a;
+}
+
+#close-cart {
+        background-color: #2d2da8;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: block;
+        margin: 20px auto;
+    }
+
+    #close-cart:hover {
+        background-color: #ff4c4c;
+        transform: scale(1.1);
+    }
+
+    #close-cart:focus {
+        outline: none;
+    }
+
+    #checkout-button {
+        background-color: #cf0505; 
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: flex;
+        justify-content: left;
+        margin: 20px auto;
+    }
+
+    #checkout-button:hover {
+        background-color: #3c3d86; 
+        transform: scale(1.05);
+    }
+
+    #checkout-button:focus {
+        outline: none;
+    }
+    
+    #clear-cart-button {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#clear-cart-button:hover {
+  background-color: #c9302c;
+}
+
+    /* Checkout Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Checkout Modal Content */
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 200%;
+}
+
+#checkout-modal {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#checkout-modal::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+#checkout-summary {
+    font-weight: 500;
+}
+
+#checkout-total {
+    color: #049610;
+}
+
+#checkout-totalNGN {
+    color: #049610;
+    font-weight: 900;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0 15px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.confirmOrderButton {
+    background: #2d2da8;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.confirmOrderButton:hover {
+    transition: 0.3 ease-in-out; 
+}
+
+.checkout-close-button {
+    background: #cf0505;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.checkout-close-button:hover {
+    background: #d62828;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.item-name {
+    flex: 1;
+    font-weight: bold;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.quantity-btn,
+.remove-btn {
+    background-color: #1E3A8A;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.quantity-btn:hover,
+.remove-btn:hover {
+    background-color: #3B82F6;
+}
+
+/* Popup Styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+#total-price{
+    color: #049610;
+    font-weight: bolder;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup p {
+    font-size: 16px;
+    margin: 0;
+}
+
+#order-info {
+    font-size: 0.8rem;
+    color: rgb(126, 3, 3);
+    font-weight: bolder;
+}
+
+#delivery-info {
+    font-size: 0.8rem;
+    color: rgb(126, 3, 3);
+    font-weight: bolder;
+}
+
+#Collection {
+    font-size: 40px;
+    font-weight: bolder;
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Order form CSS */
+.buy-button {
+    display: inline-block;
+    background: linear-gradient(to right, #000080, #1E3A8A);
+    color: #ffffff;
+    padding: 14px 22px;
+    margin-top: 15px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.buy-button:hover {
+    background: linear-gradient(to right, #1E3A8A, #3B82F6);
+}
+.order-form {
+    background: #f7f7f7;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+    margin-top: 50px;
+}
+.order-form input, .order-form select, .order-form button {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    font-size: 18px;
+}
+.order-form button {
+    background: linear-gradient(to right, #000080, #610909);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.order-form button:hover {
+    background: linear-gradient(to right, #1E3A8A, #3B82F6);
+}
+
+/* Footer CSS */
+.site-footer {
+  background-color: #111;
+  color: #eee;
+  padding: 40px 20px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#name1 {
+    color: #0a205f;
+    font-size: 40px;
+    font-weight: 900;
+    font-family: 'Dancing Script', cursive;
+}
+
+#links {
+    color: #960505;
+    font-size: 22px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+  margin: 10px;
+}
+
+.footer-section h3, .footer-section h4 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section a {
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #999;
+}
+
+.footer .social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  font-size: 24px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+  color: #f0c040; /* or your brand highlight color */
+}
+
+/* Side menu CSS */
+.side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s; 
+}
+
+.side-nav p{
+    padding: 10px 10px 10px 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #cccd;
+    display: block;
+    transition: 0.3s; 
+}
+
+.side-nav p:hover{
+    color: #fff;
+}
+
+.side-nav .btn-close {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left 0,5s;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+    </style>
+    <script src="https://kit.fontawesome.com/6160a2baf4.js" crossorigin="anonymous"></script>
+</head>
+<body id="top">
+    <nav class="navbar">
+        <div class="navbar__container">
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="navbar__btn">
+                <li class="navbar__item" id="cart-icon">
+                    <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>
+                    <span id="cart-count" style="margin-left: 6px;">(0)</span>
+                </li>                  
+                  </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="#top" class="navbar__links"> Home </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#Collection" class="navbar__links"> Products </a>
+                <li class="navbar__item">
+                    <a href="#order-form" class="navbar__links" >Order form</a>
+                </li>    
+                </li>
+            </li>
+           
+            </ul>  
+            
+        </div>
+    </nav>
+
+
+    <div>
+        <p id="Collection">Our Collection</p>
+    </div>
+
+             <script>
+            
+const menu = document.querySelector('#mobile-menu')
+const menuLinks = document.querySelector('.navbar__menu')
+
+menu.addEventListener('click', function() {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+});
+
+        </script>
+    </header>
+
+
+    <div class="priceMenu">
+        <span class="open-slide">
+            <a href="#1" onclick="openSlideMenu()">
+               <svg width="30" height="30">
+                <path d="M0,5 30,5" stroke="#000"
+                stroke-width="5"/>
+                 <path d="M0,14 30,14" stroke="#000"
+                stroke-width="5"/>
+                 <path d="M0,23 30,23" stroke="#000"
+                stroke-width="5"/>
+               </svg>
+            </a>
+        </span> 
+        </div>
+        <div id="side-menu" class="side-nav">
+            <a href="#" class="btn-close" 
+            onclick="closeSlideMenu()">&times;</a>
+            <ul>
+            <li><p onclick="showAllProducts()">All Products</p></li>
+            <hr>
+            <li><p onclick="filterProducts(0, 5000)">Under NGN 5000 </p></li>
+            <hr>
+            <li><p onclick="filterProducts(5000, 15000)">NGN 5000 - NGN 15000</p></li>
+            <hr>
+            <li><p onclick="filterProducts(15000, 20000)">NGN 15000 - NGN 20000 </p></li>
+            <hr>
+            <li><p onclick="filterProducts(20000, Infinity)">Above NGN 20000</p></li>
+            <hr>
+        </ul>
+        </div>
+
+       
+        <script>
+            function openSlideMenu(){
+
+                document.getElementById('side-menu').style.width
+                ='250px' ;
+
+            document.getElementById('main').style.marginLeft
+                ='250px' ;
+            }
+
+             function closeSlideMenu(){
+                
+                document.getElementById('side-menu').style.width
+                ='0' ;
+
+            document.getElementById('main').style.marginLeft
+                ='0' ;
+            } 
+        </script>
+            
+        </div>
+
+
+
+
+   <!--Products-->                                             
+    
+    <div class="container">
+    </div>
+        <div class="product-grid">
+            <div class="product" data-id="1" data-price="23000">
+                <img src="https://th.bing.com/th/id/OIP.gvnky9FS9MyKQ8cH_UV0JAAAAA?rs=1&pid=ImgDetMain" alt="Barakkat Satin Oud">
+                <h3>Barakkat Satin Oud</h3>
+                <p><h3> 100ml </h3></p>
+                <hr>
+                <p class="price"><strong>NGN 23,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>
+
+
+            <div class="product" data-id="2" data-price="23000">
+                <img src="https://th.bing.com/th/id/OIP.pzeSo4_u66ccl8JYOLscsQHaHg?rs=1&pid=ImgDetMain" alt="Bakkarat Rouge 540">
+                <h3>Barakkat Rouge 540</h3>
+                <p><h3> 100ml </h3></p>
+                <hr>
+                <p class="price"><strong>NGN 23,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-id="3" data-price="22000">
+                <img src="https://th.bing.com/th/id/OIP.uifNw9IlVp56Xrn2jU5FYAHaHa?rs=1&pid=ImgDetMain" alt="Mousuf Ramadi">
+                <h3>Mousuf Ramadi </h3>
+                <p><h3> 100ml </h3></p>
+                <hr>
+                <p class="price"><strong>NGN 22,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-id="4" data-price="22000">
+                <img src="https://th.bing.com/th/id/OIP.CSHnTx2_lqSWb7PEXfc9TAHaIh?rs=1&pid=ImgDetMain" alt="Mousuf Brown">
+                <h3>Mousuf Brown</h3>
+                <p><h3> 100ml </h3></p>
+                <hr>
+                <p class="price"><strong>NGN 22,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+                </div>
+
+            <div class="product" data-id="5" data-price="22000">
+                <img src="https://i.pinimg.com/736x/ee/5b/ba/ee5bba7c6fdd7d0e9688f2ce0a6719fc.jpg" alt="Mousuf Wardi">
+                <h3> Mousuf Wardi </h3>
+                <p><h3> 50ml </h3></p>
+                <hr>
+                <p class="price"><strong> NGN 22,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>    
+            <div class="product" data-id="6" data-price="25000">
+                <img src="https://i.pinimg.com/originals/bb/d9/e1/bbd9e125fa4968c8b1de94d9e38e3b64.jpg" alt="Kay ali Vanilla">
+                <h3> KAYALI Vanilla </h3>
+                <p><h3> 50ml </h3></p>
+                <hr>
+                <p class="price"><strong> NGN 25,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>    
+            <div class="product" data-id="7" data-price="25000">
+                <img src="https://sokilondon.com/wp-content/uploads/2022/07/Kayali-Elixir-11-3-500x500.jpg" alt="Kay ali Elixir">
+                <h3> KAYALI Elixir </h3>
+                <p><h3> 50ml </h3></p>
+                <hr>
+                <p class="price"><strong> NGN 25,000.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>    
+            <div class="product" data-id="8" data-price="30500">
+                <img src="https://www.myperfumeshop.com.au/cdn/shop/products/lattafa-asad-edp-perfume-cologne-638467.png?v=1702195554&width=1080" alt="Asad Lattafa">
+                <h3>Asad Lattafa</h3>
+                <p><h3> 100ml </h3> </p>
+                <hr>
+                <p class="price"><strong>NGN 30,500.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="9" data-price="5000">
+                <img src="https://i.pinimg.com/originals/8f/40/86/8f40867cea55ffd616377f21fa094be5.jpg" alt="24K">
+                <h3>24k Homme</h3>
+                <p><h3> 100ml </h3> </p>
+                <hr>
+                <p class="price"><strong>NGN 35,500.00</strong></p>
+                <button class="buy-button add-to-cart">Add to Cart</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Popup Container -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span id="popup-close" class="popup-close">&times;</span>
+        <p id="popup-message">Successfully added to cart!
+            <i class="fas-regular fa-circle-check"></i></p> 
+    </div>
+</div>
+
+    <!-- Cart Modal -->
+<div id="cart-overlay"></div>
+<div id="cart-modal">
+    <h2 id="cart-heading">Shopping Cart</h2>
+    <div id="cart-items"></div>
+
+    <p id="checkout-totalNGN">Total: NGN <span id="total-price">0</span></p>
+    <button id="checkout-button" class="checkout-btn">Checkout</button>
+    <button id="close-cart">Continue shopping</button> 
+    <button id="clear-cart-button">Clear Cart</button>
+ 
+
+</div>
+<div id="checkout-modal" style="display:none;" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Confirm Your Order</h2>
+        <form action="https://formspree.io/f/mldbgnyv" method="POST">
+
+            <label for="customer-name">Name:</label>
+            <input type="text" id="customer-name" name="customer-name" placeholder="John James" required>
+            <p>
+            <label for="address">Contact Address:</label>
+            <input type="tel" name="phone" placeholder="WhatsApp Number" required>
+            </p>
+
+            <label for="Order date">Date Ordered</label><p id="order-info">Order would be processed within 2-3 working days</p>
+            <input type="date" id="Order date" name="order date" required>
+
+            <label for="email address">Email Address</label>
+            <input type="email" name="Email address" placeholder="youremail@gmail.com">
+
+            <label for="Delivery">Delivery Plan</label> <p id="delivery-info">Door delivery has an additional fee of NGN 2,500.00</p>
+            
+            <select id="delivery" name="delivery" required>
+               
+                <option value="Pick-up">Pick-up Location</option>
+                <option value="Door Delivery">Door Delivery<strong>(Extra fee)</strong></option>
+            </select>
+            <input type="hidden" name="orderDetails" id="orderDetails">
+
+             
+            <div id="checkout-summary"></div>
+            <p id="checkout-totalNGN">Total: NGN <span id="checkout-total"></span>
+            </p>
+
+            <button type="submit" class="confirmOrderButton" id="confirmOrderButton">Confirm Order</button>
+            <button type="button" class="checkout-close-button" id="close-checkout">Cancel</button>
+        </form>
+        
+    </div>
+</div>
+
+<!--Order-form Section-->
+
+ <div class="order-form">
+            <form action="https://formspree.io/f/xyzezekv" method="POST">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                
+                <label for="product">Perfume Description:</label>
+                <input type="text" id="perfume" name="perfume" required>
+                
+                <label for="phone number">Contact Address</label>
+                <input type="tel" id="phone" name="phone" placeholder="WhatsApp Number" required>
+
+                <label for="date"> Order date </label>
+                <input type="date" id="date" name="date" required>
+                
+                <button type="submit">Submit Order</button>
+            </form>
+        </div>
+    </div>
+
+
+<!--Footer Section-->
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section about">
+      <h3 id="name1">Mistify</h3>
+      <p>Discover your signature scent. Leave a mysterious trail with your scent.</p>
+    </div>
+    <div class="footer-section links">
+      <h4 id="links">Quick Links</h4>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#Collection">Products</a></li>
+        <li><a href="#Contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h4 id="links">Contact Us</h4>
+      <p>Email: support@mistify.com</p>
+      <p>Phone: +234 803 394 3156</p>
+    </div>
+  </div>
+  <div class="social-icons">
+      <a href="https://instagram.com/Daniel Obenney" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://facebook.com/yourhandle" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://wa.me/+2348033943156" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  <div class="footer-bottom">
+    &copy; 2025 Mistify. All rights reserved.
+  </div>
+</footer>
+
+    <script>
+        const products = [
+            { id: 1, name: 'Barakkat Satin Oud', price: 23000.00 },
+            { id: 2, name: 'Barakkat Rouge 540', price: 23000.00 },
+            { id: 3, name: 'Mousuf Ramadi', price: 22000.00 },
+            { id: 4, name: 'Mousuf Brown', price: 22000.00 },
+            { id: 5, name: 'Mousuf Wardi', price: 22000.00 },
+            { id: 6, name: 'KAYALI Vanilla', price: 25000.00 },
+            { id: 7, name: 'KAYALI Elixir', price: 25000.00 },
+            { id: 8, name: 'Asad Lattafa', price: 30500.00 },
+            { id: 9, name: 'Victoria Secret', price: 35500.00 },
+        ];
+    
+        let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
+    
+        // Function to save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            saveCart();
+            updateCartUI();
+        }
+    
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartUI();
+        }
+    
+        function updateCartUI() {
+    const cartItems = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('total-price');
+    const cartCount = document.getElementById('cart-count');  // <-- Updated
+
+    cartItems.innerHTML = '';
+    let total = 0;
+    let itemCount = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        itemCount += item.quantity;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span class="item-name">${item.name}</span>
+                ${item.name} - NGN ${item.price} x ${item.quantity}
+                <button onclick="removeFromCart(${item.id})">Remove</button>
+                <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                <button onclick="updateQuantity(${item.id}, -1)">-</button>
+            </div>
+        `;
+    });
+
+    totalPrice.textContent = total.toLocaleString();
+    cartCount.textContent = `(${itemCount})`; // <-- Corrected line
+}
+
+    
+        function updateQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
+        // Function to show the popup when an item is added to the cart
+function showPopup(message) {
+    const popup = document.getElementById('popup');
+    const popupMessage = document.getElementById('popup-message');
+    popupMessage.textContent = message; // Set the message dynamically
+    popup.style.display = 'flex'; // Show the popup
+}
+
+// Close the popup when the close button is clicked
+document.getElementById('popup-close').addEventListener('click', function() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none'; // Hide the popup
+});
+
+// Close the popup when the background area is clicked
+document.getElementById('popup').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('popup')) {
+        document.getElementById('popup').style.display = 'none'; // Hide the popup when clicked outside the content
+    }
+});
+
+// Example of adding an item to the cart
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+        showPopup("Successfully added to cart!"); // Trigger popup when item is added
+    });
+});
+
+    
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const productId = parseInt(btn.closest('.product').dataset.id);
+                addToCart(productId);
+            });
+        });
+    
+        document.getElementById('cart-icon').addEventListener('click', () => {
+    document.getElementById('cart-modal').style.display = 'block';
+});
+
+    
+        document.getElementById('close-cart').addEventListener('click', () => {
+            document.getElementById('cart-modal').style.display = 'none';
+        });
+    
+        // Initial UI Update
+        updateCartUI();
+        document.getElementById('checkout-button').addEventListener('click', () => {
+    const checkoutModal = document.getElementById('checkout-modal');
+    const checkoutSummary = document.getElementById('checkout-summary');
+    const checkoutTotal = document.getElementById('checkout-total');
+
+    checkoutSummary.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+        checkoutSummary.innerHTML += `<p>${item.name} x ${item.quantity} - NGN ${item.price * item.quantity}</p>`;
+        total += item.price * item.quantity;
+    });
+    checkoutTotal.textContent = total.toLocaleString();
+    checkoutModal.style.display = 'flex';
+});
+
+// Close checkout modal
+document.getElementById('close-checkout').addEventListener('click', () => {
+    document.getElementById('checkout-modal').style.display = 'none';
+});
+document.getElementById('clear-cart-button').addEventListener('click', () => {
+  cart = [];
+  localStorage.removeItem('cart');
+  updateCartUI();
+});
+
+// Handle form submission ()
+document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Order confirmed! We will contact you shortly.');
+    cart = [];
+    localStorage.removeItem('cart');
+    updateCartUI();
+    document.getElementById('checkout-modal').style.display = 'none';
+    document.getElementById('cart-modal').style.display = 'none';
+});
+function populateCheckoutForm() {
+    navbar__btnSummary = cart.map(item => {
+        return `${item.name} x ${item.quantity} = NGN ${item.price * item.quantity}`;
+    }).join('\n');
+
+    document.getElementById('cart-summary').value = cartSummary;
+    document.getElementById('total-summary').value = `NGN ${cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toLocaleString()}`;
+}
+
+    </script>
+    
+   
+    <script>
+        document.getElementById("confirmOrderButton").addEventListener("click", () => {
+            const orderDetailsInput = document.getElementById("orderDetails");
+            if (!orderDetailsInput) return;
+    
+            let orderSummary = "";
+    
+            if (cart.length === 0) {
+                orderSummary = "No items in the cart.";
+            } else {
+                cart.forEach(item => {
+                    orderSummary += `${item.name} x${item.quantity} = NGN ${item.price * item.quantity}\n`;
+                });
+                const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+                orderSummary += `\nTotal: NGN ${total.toLocaleString()}`;
+            }
+    
+            orderDetailsInput.value = orderSummary;
+        });
+    </script>
+<script>
+  function filterProducts(minPrice, maxPrice) {
+    let products = document.querySelectorAll(".product");
+
+    products.forEach(product => {
+        let price = parseFloat(product.getAttribute("data-price"));
+        if (price >= minPrice && price <= maxPrice) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+}
+</script>
+    
+    
+
+</body>
+</html>
